@@ -6,10 +6,12 @@
     <title>Scandit Simple Sample</title>
     <script src="https://cdn.jsdelivr.net/npm/scandit-sdk@5.x"></script>
 
+    <!-- Add this line to include the barcode picker css -->
+    <link href="https://cdn.jsdelivr.net/npm/scandit-sdk@5.x/build/css/barcodepicker.css" rel="stylesheet">
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet" />
     <style>
-      body {
+       body {
         background-color: white;
         color: black;
         text-align: center;
@@ -37,11 +39,13 @@
         font-family: inherit;
         box-sizing: border-box;
         padding: 2vh 5vh;
-        margin-top: 5vh;
+        margin: auto;
+        display: block;
         width: 70vw;
         max-width: 500px;
         cursor: pointer;
       }
+      
 
       .result-text {
         padding: 2vh;
@@ -56,57 +60,66 @@
   </head>
 
   <body>
+    <!-- Your HTML markup -->
+    <body>
     <div class="logo"></div>
-    <div class="name">Web Component Simple Sample</div>
-    <div id="description" class="description">Start the scanner and then aim at a QR code to get the encoded data.</div>
+    <div class="name">Web Component QR Sample</div>
+    <div id="description" class="description">Start the scanner and then aim at a barcode to get the encoded data.</div>
     <div id="lib-loading"><br />Library is loading, please wait...</div>
-    <button id="barcode-picker-starter-button" hidden onclick="startBarcodePicker();">Start Scanner</button>
-    <div id="barcode-picker" class="scanner" hidden></div>
-    <div id="result-text" class="result-text"></div>
+    <button id="barcode-picker-starter-button" hidden onclick="startBarcodePicker()">Start Scanning</button>
+    <div id="barcode-result" class="result-text">&nbsp;</div>
+
+    <scandit-barcode-picker
+      id="barcode-picker"
+      class="scanner"
+      configure.licenseKey="AZ7ykg1bLmFWHbYO4RDq8VAEgAxmNGYcAyw/9fl0FI7/UkoiNQogR4xcYwoFWj6GangTVzd3mwOIbrywSnRDcwA3wDeqPCAdGCHUfKA7koQ5IGi96S5pzwU01br2OIfZUDMJoheyUcFveFUTzTO2uJ80eVg4NOdAI5mMIL7/F1goXMa0ayKe7g9CQ39SKoR0bmwF+WZe4c4OkOjSHswitnBF4fKtEgG359cJr/ZH2iHtuYuZ3x2MSaRwZyLYKiD+0L/9dSdT4oqIBUNbkU8f2R0RkPfB9NK1dysp2w3+qNgKh+DbWCdNNDBcsrPJbssVn0vXGfnd/J6bPmzRp4jnJbIp1DH9NGqwWJmuVIsVP2w0g3dklPjgxW/2olAyo4IB8vKm3lPlS9w+YNW+TG1FYGhr4+K4qsSaKKY/Y45zOX+yM/iJTH06KMlmW1PTj1tboDOeTCQqQDOtROfy6mx3REpZRl9B+91a0Wrsh/9nHgbZa66G454z5VgVIndSIHUuluSZkizYajS0oLrWuKe7jr+TDvwMdBgsVrvcxZaDvS/gmppdrGuO5H9NHGiLHA4F6C8pbaAUUxa70wIbhaZ/3Fj+9Yavq0AFe41E6P444LPMIQFwSgw05GUrvh+vNxv3dBstNrn1Jmly0ZMF25RDOdUCRHeRmgcDaeWeq9lqIbMdLF+LIfsJ6E4vWb+S2OvgU0xOh9MjlFDeAzI3xhWSsKlg6jPb9AntodW6N0wFhcVQVCp+HyN3C8zlBUGBtKKaFvrRdIzD2jwNTWK2JmqYz5nLH3YQM/XD+gBOg+OUXk5WYw=="
+      configure.engineLocation="https://cdn.jsdelivr.net/npm/scandit-sdk@5.x/build/"
+      accessCamera="false"
+      visible="false"
+                           
+      playSoundOnScan="true"
+      vibrateOnScan="true"
+      scanSettings.enabledSymbologies='["ean8", "ean13", "upca", "upce"]'
+    ></scandit-barcode-picker>
 
     <script>
-      // Load and initialize the Scandit SDK library
-      scanditSDK.configure("AZ7ykg1bLmFWHbYO4RDq8VAEgAxmNGYcAyw/9fl0FI7/UkoiNQogR4xcYwoFWj6GangTVzd3mwOIbrywSnRDcwA3wDeqPCAdGCHUfKA7koQ5IGi96S5pzwU01br2OIfZUDMJoheyUcFveFUTzTO2uJ80eVg4NOdAI5mMIL7/F1goXMa0ayKe7g9CQ39SKoR0bmwF+WZe4c4OkOjSHswitnBF4fKtEgG359cJr/ZH2iHtuYuZ3x2MSaRwZyLYKiD+0L/9dSdT4oqIBUNbkU8f2R0RkPfB9NK1dysp2w3+qNgKh+DbWCdNNDBcsrPJbssVn0vXGfnd/J6bPmzRp4jnJbIp1DH9NGqwWJmuVIsVP2w0g3dklPjgxW/2olAyo4IB8vKm3lPlS9w+YNW+TG1FYGhr4+K4qsSaKKY/Y45zOX+yM/iJTH06KMlmW1PTj1tboDOeTCQqQDOtROfy6mx3REpZRl9B+91a0Wrsh/9nHgbZa66G454z5VgVIndSIHUuluSZkizYajS0oLrWuKe7jr+TDvwMdBgsVrvcxZaDvS/gmppdrGuO5H9NHGiLHA4F6C8pbaAUUxa70wIbhaZ/3Fj+9Yavq0AFe41E6P444LPMIQFwSgw05GUrvh+vNxv3dBstNrn1Jmly0ZMF25RDOdUCRHeRmgcDaeWeq9lqIbMdLF+LIfsJ6E4vWb+S2OvgU0xOh9MjlFDeAzI3xhWSsKlg6jPb9AntodW6N0wFhcVQVCp+HyN3C8zlBUGBtKKaFvrRdIzD2jwNTWK2JmqYz5nLH3YQM/XD+gBOg+OUXk5WYw==", {
-        engineLocation: "https://cdn.jsdelivr.net/npm/scandit-sdk@5.x/build/",
-      });
-    
-      // Wait for the library to load and then create a barcode picker with the desired settings
-      scanditSDK
-        .loadEngine()
-        .then(() => {
-          return scanditSDK.BarcodePicker.create(document.getElementById("barcode-picker"), {
+      // Add this script to initialize the barcode picker
+      (async () => {
+        try {
+          await ScanditSDK.configure('AZ7ykg1bLmFWHbYO4RDq8VAEgAxmNGYcAyw/9fl0FI7/UkoiNQogR4xcYwoFWj6GangTVzd3mwOIbrywSnRDcwA3wDeqPCAdGCHUfKA7koQ5IGi96S5pzwU01br2OIfZUDMJoheyUcFveFUTzTO2uJ80eVg4NOdAI5mMIL7/F1goXMa0ayKe7g9CQ39SKoR0bmwF+WZe4c4OkOjSHswitnBF4fKtEgG359cJr/ZH2iHtuYuZ3x2MSaRwZyLYKiD+0L/9dSdT4oqIBUNbkU8f2R0RkPfB9NK1dysp2w3+qNgKh+DbWCdNNDBcsrPJbssVn0vXGfnd/J6bPmzRp4jnJbIp1DH9NGqwWJmuVIsVP2w0g3dklPjgxW/2olAyo4IB8vKm3lPlS9w+YNW+TG1FYGhr4+K4qsSaKKY/Y45zOX+yM/iJTH06KMlmW1PTj1tboDOeTCQqQDOtROfy6mx3REpZRl9B+91a0Wrsh/9nHgbZa66G454z5VgVIndSIHUuluSZkizYajS0oLrWuKe7jr+TDvwMdBgsVrvcxZaDvS/gmppdrGuO5H9NHGiLHA4F6C8pbaAUUxa70wIbhaZ/3Fj+9Yavq0AFe41E6P444LPMIQFwSgw05GUrvh+vNxv3dBstNrn1Jmly0ZMF25RDOdUCRHeRmgcDaeWeq9lqIbMdLF+LIfsJ6E4vWb+S2OvgU0xOh9MjlFDeAzI3xhWSsKlg6jPb9AntodW6N0wFhcVQVCp+HyN3C8zlBUGBtKKaFvrRdIzD2jwNTWK2JmqYz5nLH3YQM/XD+gBOg+OUXk5WYw==', {
+            engineLocation: 'https://cdn.jsdelivr.net/npm/scandit-sdk@5.x/build/'
+          });
+
+          const barcodePicker = await ScanditSDK.BarcodePicker.create(document.body, {
             playSoundOnScan: true,
-            vibrateOnScan: true,
+            vibrateOnScan: true
           });
-        })
-        .then((barcodePicker) => {
-          document.getElementById("lib-loading").style.display = "none";
-          document.getElementById("barcode-picker-starter-button").style.display = "block";
-    
-          // Apply the settings to enable QR code scanning
-          let scanSettings = new scanditSDK.ScanSettings();
-          scanSettings.setSymbologyEnabled(scanditSDK.Barcode.Symbology.QR, true);
-          barcodePicker.applyScanSettings(scanSettings);
-    
-          // Set the callback function for when a QR code is scanned
-          barcodePicker.on("scan", (scanResult) => {
-            document.getElementById("description").innerText = "QR Code Content:";
-            document.getElementById("result").innerText = scanResult.barcodes[0].data;
+
+          barcodePicker.applyScanSettings(
+            new ScanditSDK.ScanSettings({
+              enabledSymbologies: ['qr'],
+              codeDuplicateFilter: 1000
+            })
+          );
+
+          barcodePicker.on('scan', (scanResult) => {
+            document.getElementById('barcode-result').innerText = scanResult.barcodes.reduce(
+              (string, barcode) => string + `${barcode.symbology.toUpperCase()}: ${barcode.data}\n`,
+              ''
+            );
           });
-        })
-        .catch((error) => {
-          console.error("Failed to load Scandit SDK or create a BarcodePicker", error);
-          alert("Failed to load Scandit SDK or create a BarcodePicker");
-        });
-    
-      // Start the barcode picker when the button is clicked
+
+          document.getElementById('lib-loading').style.display = 'none';
+          document.getElementById('barcode-picker-starter-button').style.display = 'block';
+        } catch (error) {
+          console.error(error);
+          alert(error);
+        }
+      })();
+
       function startBarcodePicker() {
-        scanditSDK.BarcodePicker.create(document.getElementById("barcode-picker")).then((barcodePicker) => {
-          barcodePicker.resumeScanning();
-        });
+        document.getElementById('barcode-picker-starter-button').style.display = 'none';
       }
     </script>
-    
-    
   </body>
 </html>
