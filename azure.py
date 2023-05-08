@@ -43,8 +43,8 @@ def runAction(self, event):
         image_description = analysis['description']['captions'][0]['text']
         image_tags = ', '.join(analysis['tags'])
 
-        # Display the image description and tags
-        system.gui.messageBox(f"Description: {image_description}\nTags: {image_tags}")
+        # Update the Label component's custom property with the image description and tags
+        event.source.parent.getComponent('Label').ImageInfo = f"Description: {image_description}\nTags: {image_tags}"
 
     else:
         # If the request was not successful, display an error message
