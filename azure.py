@@ -1,18 +1,17 @@
-def runAction(self, event):
-	import base64
+import base64
 	import json
 	import system
 	
 	def runAction(self, event):
 	    # Replace 'your_api_key' and 'your_endpoint' with your actual Azure API key and endpoint
 	    api_key = '8abff6a9371340838065db2c74763698'
-	    endpoint = 'C:\Users\u295848\OneDrive - Oshkosh Corporation-oskgovus\Pictures\IMG_7882.JPG'
+	    endpoint = 'https://serialnum.cognitiveservices.azure.us/'
 	
 	    # Set the Computer Vision API's Analyze Image URL
 	    analyze_url = endpoint + 'vision/v3.2/analyze'
 	
 	    # Read the image file
-	    image_path = 'C:\Users\u295848\OneDrive - Oshkosh Corporation-oskgovus\Pictures\IMG_7907.JPG'  # Replace this with the path to your image
+	    image_path = 'C:\\Users\\u295848\\OneDrive - Oshkosh Corporation-oskgovus\\Pictures\\IMG_7907.JPG'  # the path to your image
 	    with open(image_path, 'rb') as image_file:
 	        image_data = image_file.read()
 	
