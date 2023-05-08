@@ -4,7 +4,7 @@ import system
 
 # Replace 'your_api_key' and 'your_endpoint' with your actual Azure API key and endpoint
 api_key = '8abff6a9371340838065db2c74763698'
-endpoint = 'https://your_region.api.cognitive.microsoft.com/'  # Replace 'your_region' with your actual region
+endpoint = 'https://serialnum.cognitiveservices.azure.us/'  # Replace 'your_region' with your actual region
 
 # Set the Computer Vision API's Analyze Image URL
 analyze_url = endpoint + 'vision/v3.2/analyze'

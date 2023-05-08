@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Azure Computer Vision OCR Demo</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Azure Computer Vision OCR Demo</h1>
+    <div id="cameraContainer">
+        <video id="cameraFeed" autoplay></video>
+        <div id="cameraOverlay"></div>
+    </div>
+    <button id="captureBtn">Capture Image</button>
+    <img id="preview" alt="Captured image preview">
+    <canvas id="capturedImage" style="display:none;"></canvas>
+    <button id="submitBtn">Extract Text</button>
+    <div id="results">
+        <h2>Results:</h2>
+        <pre id="textOutput"></pre>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
