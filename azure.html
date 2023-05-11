@@ -56,10 +56,13 @@ h1 {
 <body>
     <h1>Azure Computer Vision OCR Demo</h1>
     <div id="cameraContainer">
-        <video id="cameraFeed" autoplay></video>
-        <div id="cameraOverlay"></div>
+        <input id="cameraInput" type="file" accept="image/*" capture="environment" style="display:none;">
+        <label for="cameraInput" id="cameraLabel">
+            <video id="cameraFeed" autoplay playsinline style="display:none;"></video>
+            <div id="cameraOverlay" style="display:none;"></div>
+        </label>
     </div>
-    <button id="captureBtn">Capture Image</button>
+    <button id="captureBtn" style="display:none;">Capture Image</button>
     <img id="preview" alt="Captured image preview">
     <canvas id="capturedImage" style="display:none;"></canvas>
     <button id="submitBtn">Extract Text</button>
