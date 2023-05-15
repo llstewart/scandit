@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Azure Computer Vision OCR Demo</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet" />
+    <style>
+    body {
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        #cameraContainer {
+            position: relative;
+            display: inline-block;
+            max-width: 250px;
+            margin: 0 auto;
+        }
+
+        #cameraFeed,
+        #preview {
+            width: 100%;
+            height: auto;
+            border: 3px solid #333;
+            box-sizing: border-box;
+            max-width: 250px;
+        }
+
+        #cameraOverlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 60%;
+            height: 60%;
+            box-sizing: border-box;
+            border: 3px solid rgba(0, 255, 0, 0.5);
+            pointer-events: none;
+            display: none;
+            transform: translate(-50%, -50%);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        button {
+            display: block;
+            margin: 1em auto;
+        }
+
+        #results {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+</style>
+</head>
+<body>
+    <h1>Azure Computer Vision OCR Demo</h1>
+    <div id="cameraContainer">
+        <input id="cameraInput" type="file" accept="image/*" capture="environment" style="display:none;">
+        <label for="cameraInput" id="cameraLabel">
+            <video id="cameraFeed" autoplay playsinline></video>
+            <div id="cameraOverlay"></div>
+        </label>
+    </div>
+    <button id="captureBtn">Capture Image</button>
+    <div id="results">
+        <h2>Results:</h2>
+        <pre id="textOutput"></pre>
+    </div>
+    <button id="submitBtn">Extract Text</button>
+    <img id="preview" alt="Captured image preview">
+    <canvas id="capturedImage" style="display:none;"></canvas>
+    
+    <script>
+      const cameraInput = document.getElementById("cameraInput");
+const cameraLabel = document.getElementById("cameraLabel");
+const cameraFeed = document.getElementById("cameraFeed");
+const cameraOverlay = document.getElementById("cameraOverlay");
+const captureBtn = document.getElementById("captureBtn");
+const preview = document.getElementById("preview");
+const capturedImage = document.getElementById("capturedImage");
+const submitBtn = document.getElementById("submitBtn");
+const textOutput = document.getElementById("textOutput");
+
+// Replace with your own API key and endpoint
+const apiKey = "8abff6a9371340838065db2c74763698";
+const endpoint = "https://serialnum.cognitiveservices.azure.us/vision/v3.2/ocr";
+
+
+
+cameraInput.style.display = "none";
+navigator.mediaDevices
+    .getUserMedia({ video: { facingMode: "environment" } })
+    .then((stream) => {
+        cameraFeed.srcObject = stream;
+        cameraFeed.addEventListener("loadedmetadata", () => {
+            cameraOverlay.style.display = "block";
+        });
+    })
+    .catch((err) => {
+        console.error(err);
+        alert("Error: Unable to access the camera.");
+    });
+
+// Capture image from camera feed
+captureBtn.addEventListener("click", () => {
+    capturedImage.width = cameraFeed.videoWidth;
+    capturedImage.height = cameraFeed.videoHeight;
+    const context = capturedImage.getContext("2d");
+    context.drawImage(cameraFeed, 0, 0);
+
+    // Display preview of captured image
+    preview.src = capturedImage.toDataURL("image/jpeg");
+});
+
+cameraInput.addEventListener("change", (event) => {
+    const file = event.target.files[0];
+    if (file) {
+        preview.src = URL.createObjectURL(file);
+    }
+});
+
+function extractAfterSerNo(text) {
+    const regex = /(?<=SER\.NO\.)\s*(\w+)/g;
+    const matches = text.match(regex);
+    return matches ? matches.join("\n") : "";
+}
+
+// Process captured image and extract text
+submitBtn.addEventListener("click", async () => {
+    textOutput.textContent = "Processing...";
+    try {
+        const response = await fetch(endpoint, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/octet-stream",
+                "Ocp-Apim-Subscription-Key": apiKey,
+            },
+            body: await new Promise((resolve) => {
+                if (cameraInput.files.length > 0) {
+                    cameraInput.files[0].arrayBuffer().then((buffer) => resolve(buffer));
+                } else {
+                    capturedImage.toBlob((blob) => resolve(blob), "image/jpeg");
+                }
+            }),
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            const text = data.regions
+                .flatMap((region) => region.lines)
+                .map((line) => line.words.map((word) => word.text).join(" "))
+                .join("\n");
+            const extractedText = extractAfterSerNo(text);
+            textOutput.textContent = extractedText;
+
+        } else {
+            textOutput.textContent = "Error: Unable to process the image.";
+        }
+    } catch (error) {
+        console.error(error);
+        textOutput.textContent = "Error: Unable to process the image.";
+    }
+});
+</script>
+</body>
+</html>
