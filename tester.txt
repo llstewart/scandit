@@ -12,5 +12,13 @@ def valueChanged(tag, tagPath, previousValue, currentValue, initialChange, misse
 	    except Exception as e:
 	        system.gui.messageBox("Error writing to tag: %s" % e)
 
-Error writing tags Error writing to tag '[default]McConnellsburg/McConnellsburg/Frame Fab/Cell 2/State Output': Bad_NotFound
+------------------------------
+value = 3
+if value == 3:
+	try:
+	    system.tag.writeBlocking(["[default]ReaderTag"], values=["hey"])
+	except Exception as e:
+	    system.gui.messageBox("Error writing to tag:%s" % e)
+[Error_TypeConversion("Error trying to coerce 'hey' to a number.")]
+
 
