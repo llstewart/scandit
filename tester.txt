@@ -22,3 +22,20 @@ if value == 3:
 [Error_TypeConversion("Error trying to coerce 'hey' to a number.")]
 
 
+
+
+
+
+
+
+
+=====================================================
+value = system.tag.readBlocking(["[MQTT Engine]Edge Nodes/McConnellsburg/Frame Fabrication/Robot Cell 7/raw/Robot 4/Field1"])[0].value
+
+if value == 3:
+	try:
+	    system.tag.writeBlocking(["[default]ReaderTag"], values=["autos"])
+	except Exception as e:
+	    system.gui.messageBox("Error writing to tag:%s" % e)
+	
+
