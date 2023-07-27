@@ -1,0 +1,13 @@
+def valueChanged(tag, tagPath, previousValue, currentValue, initialChange, missedEvents):
+	value = newValue.value
+	
+	mapping =  {3 : "hi"}
+	
+	if value in mapping:
+	    string_value = mapping[value]
+	    
+	    try:
+	        system.tag.writeBlocking(paths=["[default]tester"], values=[string_value])
+	    
+	    except Exception as e:
+	        system.gui.messageBox("Error writing to tag: %s" % e)
