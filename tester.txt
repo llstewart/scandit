@@ -49,4 +49,45 @@ def valueChanged(tag, tagPath, previousValue, currentValue, initialChange, misse
 	except Exception as e:
 		system.gui.messageBox("Error writing to tag:%s" % e)
 	
-	
+	========================================================
+def valueChanged(tag, tagPath, previousValue, currentValue, initialChange, missedEvents):
+    value = system.tag.readBlocking(["[MQTT Engine]Edge Nodes/McConnellsburg/Frame Fabrication/Robot Cell 7/raw/Robot 4/Field1"])[0].value
+    print value
+    status = ""
+    if value == 3:
+        print('inside the if block for value 3')
+        status = "Blocked"
+    elif value == 4:
+        print('inside the if block for value 4')
+        status = "Running"
+    elif value == 5:
+        print('inside the if block for value 5')
+        status = "Cool"
+    else:
+        print('Unexpected value')
+    try:
+        system.tag.writeBlocking(["[default]Robot4status"], values=[status])
+    except Exception as e:
+        system.gui.messageBox("Error writing to tag:%s" % e)
+============================================================================
+def valueChanged(tag, tagPath, previousValue, currentValue, initialChange, missedEvents):
+    value = system.tag.readBlocking(["[MQTT Engine]Edge Nodes/McConnellsburg/Frame Fabrication/Robot Cell 7/raw/Robot 4/Field1"])[0].value
+    print value
+
+    # Define a dictionary that maps values to statuses
+    value_status_map = {3: "Blocked", 4: "Running", 5: "Cool"}
+
+    # Default status for unexpected values
+    status = "Unknown"
+
+    if value in value_status_map:
+        status = value_status_map[value]
+        print(f'inside the if block for value {value}, status: {status}')
+    else:
+        print('Unexpected value')
+        
+    try:
+        system.tag.writeBlocking(["[default]Robot4status"], values=[status])
+    except Exception as e:
+        system.gui.messageBox("Error writing to tag:%s" % e)
+
