@@ -39,3 +39,14 @@ if value == 3:
 	    system.gui.messageBox("Error writing to tag:%s" % e)
 	
 
+def valueChanged(tag, tagPath, previousValue, currentValue, initialChange, missedEvents):
+	value = system.tag.readBlocking(["[MQTT Engine]Edge Nodes/McConnellsburg/Frame Fabrication/Robot Cell 7/raw/Robot 4/Field1"])[0].value
+	print value
+	if value == 3:
+	    print('inside the if block')
+	try:
+		system.tag.writeBlocking(["[default]Robot4status"], values=["Blocked"])
+	except Exception as e:
+		system.gui.messageBox("Error writing to tag:%s" % e)
+	
+	
