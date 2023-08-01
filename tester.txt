@@ -101,3 +101,4 @@ concat(
     ", Part number: ", toString({[~]field 7}),
     ", Station running: ", if({[~]field 4}=0, "no stations running", if({[~]field 4}=1, "station A running", "station B running"))
 )
+"Alarm code: ", toString({[MQTT Engine]Edge Nodes/McConnellsburg/Frame Fabrication/Robot Cell 7/raw/Robot 4]field O}),
