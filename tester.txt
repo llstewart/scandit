@@ -90,4 +90,14 @@ def valueChanged(tag, tagPath, previousValue, currentValue, initialChange, misse
         system.tag.writeBlocking(["[default]Robot4status"], values=[status])
     except Exception as e:
         system.gui.messageBox("Error writing to tag:%s" % e)
-
+---------------
+concat(
+    "Alarm code: ", toString({[~]field O}),
+    ", Current lamp: ", if({[~]field 5}=0, "no lamps", if({[~]field 5}=1, "Start lamp is on", "Held lamp is on")),
+    ", Job Line: ", toString({[~]field 1}),
+    ", Job name: ", toString({[~]field 6}),
+    ", Job step: ", toString({[~]field 2}),
+    ", Mode: ", if({[~]field 3}=0, "teach", "play"),
+    ", Part number: ", toString({[~]field 7}),
+    ", Station running: ", if({[~]field 4}=0, "no stations running", if({[~]field 4}=1, "station A running", "station B running"))
+)
