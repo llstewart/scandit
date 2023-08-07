@@ -193,3 +193,36 @@ concat(
         ", Station running: ", if({[MQTT Engine]Edge Nodes/McConnellsburg/Frame Fabrication/Robot Cell 7/raw/Robot 4/Field4}=0, "no stations running", if({[MQTT Engine]Edge Nodes/McConnellsburg/Frame Fabrication/Robot Cell 7/raw/Robot 4/Field4}=1, "station A running", "station B running"))
 
 )
+
+
+-----------------------------------------------------------updated-------------------------
+concat(
+    "Alarm code: ", toString({[MQTT Engine]Edge Nodes/McConnellsburg/Frame Fabrication/Robot Cell 7/raw/Robot 4/Field0}),
+    ", Current lamp: ", if({[MQTT Engine]Edge Nodes/McConnellsburg/Frame Fabrication/Robot Cell 7/raw/Robot 4/field5}=0, "no lamps", if({[MQTT Engine]Edge Nodes/McConnellsburg/Frame Fabrication/Robot Cell 7/raw/Robot 4/field5}=1, "Start lamp is on", "Held lamp is on")),
+    ", Job Line: ", toString({[MQTT Engine]Edge Nodes/McConnellsburg/Frame Fabrication/Robot Cell 7/raw/Robot 4/Field1}),
+    ", Job name: ", toString({[MQTT Engine]Edge Nodes/McConnellsburg/Frame Fabrication/Robot Cell 7/raw/Robot 4/Field6}),
+    ", Job step: ", toString({[MQTT Engine]Edge Nodes/McConnellsburg/Frame Fabrication/Robot Cell 7/raw/Robot 4/Field2}),
+    ", Mode: ", if({[MQTT Engine]Edge Nodes/McConnellsburg/Frame Fabrication/Robot Cell 7/raw/Robot 4/Field3}=0, "teach", "play"),
+    ", Part number: ", toString({[MQTT Engine]Edge Nodes/McConnellsburg/Frame Fabrication/Robot Cell 7/raw/Robot 4/Field7}),
+    ", Station running: ", if({[MQTT Engine]Edge Nodes/McConnellsburg/Frame Fabrication/Robot Cell 7/raw/Robot 4/Field4}=0, "no stations running", if({[MQTT Engine]Edge Nodes/McConnellsburg/Frame Fabrication/Robot Cell 7/raw/Robot 4/Field4}=1, "station A running", "station B running")),
+    ", Status: ", 
+    if(
+        {[MQTT Engine]Edge Nodes/McConnellsburg/Frame Fabrication/Robot Cell 7/raw/Robot 4/field5}=1 
+        && ({[MQTT Engine]Edge Nodes/McConnellsburg/Frame Fabrication/Robot Cell 7/raw/Robot 4/Field4}="A" || {[MQTT Engine]Edge Nodes/McConnellsburg/Frame Fabrication/Robot Cell 7/raw/Robot 4/Field4}="B" || {[MQTT Engine]Edge Nodes/McConnellsburg/Frame Fabrication/Robot Cell 7/raw/Robot 4/Field4}!="None") 
+        && {[MQTT Engine]Edge Nodes/McConnellsburg/Frame Fabrication/Robot Cell 7/raw/Robot 4/Field7}!="" 
+        && {[MQTT Engine]Edge Nodes/McConnellsburg/Frame Fabrication/Robot Cell 7/raw/Robot 4/Field3}=1, 
+        "Running", 
+        if(
+            ({[MQTT Engine]Edge Nodes/McConnellsburg/Frame Fabrication/Robot Cell 7/raw/Robot 4/field5}=0 
+            && ({[MQTT Engine]Edge Nodes/McConnellsburg/Frame Fabrication/Robot Cell 7/raw/Robot 4/Field4}="A" || {[MQTT Engine]Edge Nodes/McConnellsburg/Frame Fabrication/Robot Cell 7/raw/Robot 4/Field4}="B" || {[MQTT Engine]Edge Nodes/McConnellsburg/Frame Fabrication/Robot Cell 7/raw/Robot 4/Field4}!="None") 
+            && {[MQTT Engine]Edge Nodes/McConnellsburg/Frame Fabrication/Robot Cell 7/raw/Robot 4/Field7}!="") 
+            || 
+            ({[MQTT Engine]Edge Nodes/McConnellsburg/Frame Fabrication/Robot Cell 7/raw/Robot 4/field5}=1 
+            && ({[MQTT Engine]Edge Nodes/McConnellsburg/Frame Fabrication/Robot Cell 7/raw/Robot 4/Field4}="A" || {[MQTT Engine]Edge Nodes/McConnellsburg/Frame Fabrication/Robot Cell 7/raw/Robot 4/Field4}="B" || {[MQTT Engine]Edge Nodes/McConnellsburg/Frame Fabrication/Robot Cell 7/raw/Robot 4/Field4}!="None") 
+            && {[MQTT Engine]Edge Nodes/McConnellsburg/Frame Fabrication/Robot Cell 7/raw/Robot 4/Field7}!="" 
+            && {[MQTT Engine]Edge Nodes/McConnellsburg/Frame Fabrication/Robot Cell 7/raw/Robot 4/Field3}=0), 
+            "Down", 
+            "Unknown"
+        )
+    )
+)
