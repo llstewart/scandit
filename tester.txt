@@ -1,4 +1,28 @@
+IF 
+[~]McConnellsburg/Frame Fabrication/Robot Cell {cellNum}/raw/Robot {robotNum}/Field5 = 1 AND
+([~]McConnellsburg/Frame Fabrication/Robot Cell {cellNum}/raw/Robot {robotNum}/Field4 = 1 OR
+ [~]McConnellsburg/Frame Fabrication/Robot Cell {cellNum}/raw/Robot {robotNum}/Field4 = 2 OR
+ [~]McConnellsburg/Frame Fabrication/Robot Cell {cellNum}/raw/Robot {robotNum}/Field4 != 0) AND
+[~]McConnellsburg/Frame Fabrication/Robot Cell {cellNum}/raw/Robot {robotNum}/Field7 != "" AND
+[~]McConnellsburg/Frame Fabrication/Robot Cell {cellNum}/raw/Robot {robotNum}/Field3 = 1
+THEN
+Machine State = "Running"
 
+ELSE IF 
+([~]McConnellsburg/Frame Fabrication/Robot Cell {cellNum}/raw/Robot {robotNum}/Field5 = 0 AND
+([~]McConnellsburg/Frame Fabrication/Robot Cell {cellNum}/raw/Robot {robotNum}/Field4 = 1 OR
+ [~]McConnellsburg/Frame Fabrication/Robot Cell {cellNum}/raw/Robot {robotNum}/Field4 = 2 OR
+ [~]McConnellsburg/Frame Fabrication/Robot Cell {cellNum}/raw/Robot {robotNum}/Field4 != 0) AND
+[~]McConnellsburg/Frame Fabrication/Robot Cell {cellNum}/raw/Robot {robotNum}/Field7 != "")
+OR
+([~]McConnellsburg/Frame Fabrication/Robot Cell {cellNum}/raw/Robot {robotNum}/Field5 = 1 AND
+([~]McConnellsburg/Frame Fabrication/Robot Cell {cellNum}/raw/Robot {robotNum}/Field4 = 1 OR
+ [~]McConnellsburg/Frame Fabrication/Robot Cell {cellNum}/raw/Robot {robotNum}/Field4 = 2 OR
+ [~]McConnellsburg/Frame Fabrication/Robot Cell {cellNum}/raw/Robot {robotNum}/Field4 != 0) AND
+[~]McConnellsburg/Frame Fabrication/Robot Cell {cellNum}/raw/Robot {robotNum}/Field7 != "" AND
+[~]McConnellsburg/Frame Fabrication/Robot Cell {cellNum}/raw/Robot {robotNum}/Field3 = 0)
+THEN
+Machine State = "Down"
 
 
 
