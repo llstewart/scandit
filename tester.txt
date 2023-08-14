@@ -1,3 +1,112 @@
+
+
+
+
+
+follow guideline-[~]McConnellsburg/Frame Fabrication/Robot Cell {cellNum}/raw/Robot {robotNum}/Field1
+
+Alarm code: field 0
+Current lamp: field 5. if value is (0)- no lamps
+If value = 1. Start lamp is on
+If value =2 . Held lamp is on
+
+Job Line: field 1  (int)
+Job name : field 6  (str)
+Job step: field 2  (int)
+Mode : field 3  (int) . If =0; "teach". If = 1 ; "play"
+Part number:  field 7 (str)
+Station running : field 4  (int)
+If = 0; no stations running
+If = 1 ; station A running
+If = 2 ; station B running
+
+-------------------------------------
+Running
+
+If
+
+Start lamp on  -
+
+And
+
+Station =  A or B   or not "None"
+
+And
+
+Part# = Not blank
+
+And
+
+Mode = play
+
+ 
+
+ 
+
+ 
+
+Down
+
+If
+
+Lamp  = Off
+
+And
+
+Station = A or B   or not "None"
+
+AND
+
+Part # exist
+
+ 
+
+OR
+
+ 
+
+If
+
+Start lamp on  -
+
+And
+
+Station =  A or B   or not "None"
+
+And
+
+Part# = Not blank
+
+And
+
+Mode = TEACH
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 def valueChanged(tag, tagPath, previousValue, currentValue, initialChange, missedEvents):
 	value = newValue.value
 	
