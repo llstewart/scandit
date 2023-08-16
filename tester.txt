@@ -1,4 +1,10 @@
 if(
+({[.]DynamicFieldTag/Field5} == '1' && {[.]DynamicFieldTag/Field4} == '1') || {[.]DynamicFieldTag/Field4} == '2' || ({[.]DynamicFieldTag/Field4} == "" && {[.]DynamicFieldTag/Field3} == '1'),"Running")
+
+
+
+
+if(
 {[.]DynamicFieldTag/Field5} = '1' && {[.]DynamicFieldTag/Field4} = '1' || {[.]DynamicFieldTag/Field4} = '2' || {[.]DynamicFieldTag/Field4} = "" && {[.]DynamicFieldTag/Field3} = '1',"Running")
 
 
