@@ -1,3 +1,27 @@
+if(
+{[.]DynamicFieldTag/Field5} = '1' && {[.]DynamicFieldTag/Field4} = '1' || {[.]DynamicFieldTag/Field4} = '2' || {[.]DynamicFieldTag/Field4} = "" && {[.]DynamicFieldTag/Field3} = '1',"Running")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 IF 
 [~]McConnellsburg/Frame Fabrication/Robot Cell {cellNum}/raw/Robot {robotNum}/Field5 = 1 AND
 ([~]McConnellsburg/Frame Fabrication/Robot Cell {cellNum}/raw/Robot {robotNum}/Field4 = 1 OR
