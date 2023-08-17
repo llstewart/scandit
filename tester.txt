@@ -1,3 +1,16 @@
+
+if(
+(({[.]DynamicFieldTag/Field7} != "" && {[.]DynamicFieldTag/Field5} = '1' && {[.]DynamicFieldTag/Field4} = '1') || {[.]DynamicFieldTag/Field4} = '2' || ({[.]DynamicFieldTag/Field4} = "" && {[.]DynamicFieldTag/Field3} = '1')),"Running", 
+if(
+(({[.]DynamicFieldTag/Field7} != " " && {[.]DynamicFieldTag/Field5} = '0' && {[.]DynamicFieldTag/Field4} = '1') || {[.]DynamicFieldTag/Field4} = '2' || ({[.]DynamicFieldTag/Field4} = "")),"Down", 
+if(
+(({[.]DynamicFieldTag/Field7} != "" && {[.]DynamicFieldTag/Field5} = '1' && {[.]DynamicFieldTag/Field4} = '1') || {[.]DynamicFieldTag/Field4} = '2' || ({[.]DynamicFieldTag/Field4} = "" && {[.]DynamicFieldTag/Field3} = '0')),"Available", "Not Running")))
+
+
+
+
+
+
 if(
 
 (({[.]DynamicFieldTag/Field7} != "" && {[.]DynamicFieldTag/Field5} = '1' && {[.]DynamicFieldTag/Field4} = '1') || {[.]DynamicFieldTag/Field4} = '2' || ({[.]DynamicFieldTag/Field4} = "" && {[.]DynamicFieldTag/Field3} = '1')),"Running", 
