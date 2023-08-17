@@ -1,3 +1,21 @@
+Running if 
+Field 5 = 1
+And field 4 = 1 0r 2 or not 'none'
+And field 7 !=""
+And field 3 = 1
+
+Down if 
+Field 5 = 0
+And field 4 = 1 0r 2 or not 'none'
+And field 7 !=""
+ or 
+Field 5 = 1
+And field 4 = 1 0r 2 or not 'none'
+And field 7 !=""
+And field 3 = 1
+
+
+
 if(
 (({[.]DynamicFieldTag/Field5} = '1' && {[.]DynamicFieldTag/Field4} = '1') || {[.]DynamicFieldTag/Field4} = '2' || ({[.]DynamicFieldTag/Field4} = "" && {[.]DynamicFieldTag/Field3} = '1')),"Running", "Not Running")
 
