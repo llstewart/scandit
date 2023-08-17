@@ -1,3 +1,28 @@
+if(
+  {[.]DynamicFieldTag/Field5} = 1 &&
+  ({[.]DynamicFieldTag/Field4} = 1 || {[.]DynamicFieldTag/Field4} = 2 || {[.]DynamicFieldTag/Field4} != 'none') &&
+  {[.]DynamicFieldTag/Field7} != "" &&
+  {[.]DynamicFieldTag/Field3} = 1
+) {
+  "Running";
+} else if (
+  {[.]DynamicFieldTag/Field5} = 0 &&
+  ({[.]DynamicFieldTag/Field4} = 1 || {[.]DynamicFieldTag/Field4} = 2 || {[.]DynamicFieldTag/Field4} != 'none') &&
+  {[.]DynamicFieldTag/Field7} != ""
+) {
+  "Down";
+} else if (
+  {[.]DynamicFieldTag/Field5} = 1 &&
+  ({[.]DynamicFieldTag/Field4} = 1 || {[.]DynamicFieldTag/Field4} = 2 || {[.]DynamicFieldTag/Field4} != 'none') &&
+  {[.]DynamicFieldTag/Field7} != "" &&
+  {[.]DynamicFieldTag/Field3} = 1
+) {
+  "Available";
+} else {
+  "Not Running";
+}
+
+
 Running if 
 Field 5 = 1
 And field 4 = 1 0r 2 or not 'none'
