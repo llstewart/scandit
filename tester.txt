@@ -1,8 +1,5 @@
-
 if(
-(({[.]DynamicFieldTag/Field7} <> "" && {[.]DynamicFieldTag/Field5} = '1' && {[.]DynamicFieldTag/Field4} = '1') || {[.]DynamicFieldTag/Field4} = '2' || ({[.]DynamicFieldTag/Field4} = "" && {[.]DynamicFieldTag/Field3} = '1')),"Running", "Not Running")
-
- 
+(({[.]DynamicFieldTag/Field7} != "" && {[.]DynamicFieldTag/Field5} = '1' && {[.]DynamicFieldTag/Field4} = '1') || {[.]DynamicFieldTag/Field4} = '2' || ({[.]DynamicFieldTag/Field4} = "" && {[.]DynamicFieldTag/Field3} = '1')),"Running", "Not Running")
 
 
 
