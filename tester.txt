@@ -1,4 +1,9 @@
-
+SyntaxError: no viable alternative at input 'JLG' (<input>, line 2)
+>>> 
+import system
+tagValue = system.tag.read([Testing]JLG/McConnellsburg/Frame Fabrication/Frame Cell 7/Robot 5/Machine State).value
+	
+event.source.parent.getComponent('Label').text = str(tagValue)
 
 if(
 (({[.]DynamicFieldTag/Field7} != "" && {[.]DynamicFieldTag/Field5} = '1' && {[.]DynamicFieldTag/Field4} = '1') || {[.]DynamicFieldTag/Field4} = '2' || ({[.]DynamicFieldTag/Field4} = "" && {[.]DynamicFieldTag/Field3} = '1')),"Running", 
