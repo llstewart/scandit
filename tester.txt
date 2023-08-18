@@ -1,3 +1,6 @@
+
+Error running action 'component.onActionPerformed' on SupervisorDashboard@D/root/Button_3: Traceback (most recent call last): File "<function:runAction>", line 4, in runAction AttributeError: 'com.inductiveautomation.ignition.common.script.ada' object has no attribute 'source'
+
 SyntaxError: no viable alternative at input 'JLG' (<input>, line 2)
 >>> 
 import system
